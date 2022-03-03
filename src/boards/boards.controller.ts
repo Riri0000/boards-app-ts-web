@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 
 @Controller('boards')
 export class BoardsController {
@@ -22,6 +30,11 @@ export class BoardsController {
     @Param('id') id: string,
     @Body() updateBoardDto: UpdateBoardDto,
   ): string {
-    return 'this action update the task';
+    return 'this action update the board';
+  }
+
+  @Delete(':id')
+  deleteBoard(@Param('id') id: string) {
+    return 'this action delete the board';
   }
 }
