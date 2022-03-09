@@ -1,0 +1,14 @@
+### Get all tasks
+GET http://localhost:3000/boards
+
+### Get a task
+GET http://localhost:3000/boards/1
+
+### Post a task
+POST http://localhost:3000/boards
+
+### Delete a task
+DELETE http://localhost:3000/boards/1
+
+### Update a task
+PATCH  http://localhost:3000/boards/1

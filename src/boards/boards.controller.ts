@@ -1,27 +1,41 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { Board } from '../entities/boards.entity';
+import { BoardsService } from './boards.service';
+import { CreateBoardDto } from './dto/create-board.dto';
+import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Controller('boards')
 export class BoardsController {
+  constructor(private boardsService: BoardsService) {}
+
   @Get()
-  fetchBoards(): string {
-    return 'this action returns all boards';
+  fetchBoards(): Promise<Board[]> {
+    return this.boardsService.fetchBoards();
   }
 
   @Get(':id')
-  fetchBoard(@Param('id') id: string): string {
-    return 'this action returns a board';
+  fetchBoard(@Param('id', ParseIntPipe) id: number): Promise<Board> {
+    return this.boardsService.fetchBoard(id);
   }
 
   @Post()
-  createBoard(): string {
-    return 'this action creates a board';
+  createBoard(@Body() dto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(dto);
   }
 
   @Put(':id')
   updateBoard(
-    @Param('id') id: string,
-    @Body() updateBoardDto: UpdateBoardDto,
-  ): string {
-    return 'this action update the task';
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateBoardDto,
+  ): Promise<Board> {
+    return this.boardsService.updateBoard(id, dto);
   }
 }
