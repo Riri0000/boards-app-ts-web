@@ -83,5 +83,9 @@
       "npx eslint . --fix",
       "npx prettier --write ."
     ]
-  }
+  },
+  "eslintIgnore": [
+    "/.eslintrc.js",
+    "/dist"
+  ]
 }
